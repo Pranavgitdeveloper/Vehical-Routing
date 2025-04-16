@@ -37,3 +37,4 @@ if __name__ == '__main__':
     os.makedirs('output', exist_ok=True)    # Ensure the output folder exists for saving the plot image
     app.run(debug=True)                        # Run the app in debug mode for live reloading and error display
 
+# test
