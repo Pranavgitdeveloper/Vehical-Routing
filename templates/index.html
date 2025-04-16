@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Routing App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Smart Routing App</div>
+        <!-- <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#info">Information</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul> -->
+    </nav>
+
+    <!-- About/Information Section -->
+    <section class="info" id="about">
+        <h2>What is Vehicle Routing?</h2>
+        <p>
+            Vehicle Routing Problem (VRP) is a complex optimization problem where the goal is to find the most efficient routes 
+            for a fleet of vehicles to deliver goods or services to a set of customers. It helps in reducing cost, improving 
+            delivery efficiency, and minimizing travel distance. In this project, we implement a soft computing approach 
+            using Genetic Algorithms to solve the VRP. The user inputs customer locations, depot coordinates, and number of 
+            vehicles, and the app outputs optimized routes and visual representation.
+        </p>
+    </section>
+
+    <!-- Input Form -->
+    <section class="form-section" id="home">
+        <h2>Enter Routing Details</h2>
+        <form id="routing-form" method="POST" action="/run">
+            <label>Number of Customers:</label>
+            <input type="number" name="num_customers" required>
+
+            <label>Customer Coordinates (one per line, x y):</label>
+            <textarea name="customer_coords" rows="5" placeholder="e.g.\n20 30\n40 10\n..."></textarea>
+
+            <label>Number of Vehicles:</label>
+            <input type="number" name="num_vehicles" required>
+
+            <label>Depot Coordinates (x y):</label>
+            <input type="text" name="depot" placeholder="e.g. 50 50" required>
+
+            <button type="submit">Run</button>
+            
+            <!-- Graph Display Box -->
+            <div class="graph-container" id="graph-box">
+                {% if result %}
+                <h3>Optimized Routes Visualization</h3>
+                <img src="{{ url_for('static', filename='plot.png') }}" alt="Route Plot" class="result-img">
+                {% else %}
+                <p class="graph-placeholder">Graph will appear here after calculation</p>
+                {% endif %}
+            </div>
+        </form>
+    </section>
+
+    <!-- Output Section -->
+    <section class="output-section">
+        {% if result %}
+        <h2>Results</h2>
+        <pre>{{ result }}</pre>
+        {% endif %}
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-icons">
+            <a href="#"><img src="../static/icons8-facebook-logo-50.png" alt="Facebook"></a>
+            <a href="#"><img src="/static/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="/static/instagram.png" alt="Instagram"></a>
+        </div>
+        <p>&copy; 2025 Smart Routing App. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
